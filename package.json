@@ -1,0 +1,20 @@
+{
+  "name": "better-one-tab-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "chrome-promise": "^2.0.3",
+    "firebase": "^4.3.1",
+    "font-awesome": "^4.7.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.13",
+    "shoelace-css": "^1.0.0-beta22"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
