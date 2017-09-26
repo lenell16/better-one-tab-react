@@ -54,3 +54,7 @@ body {
 span.count {
   color: #b0b0af;
 }
+
+span.incog {
+  float: right;
+}

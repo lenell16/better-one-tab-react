@@ -2,7 +2,7 @@ import ChromePromise from 'chrome-promise'
 
 const chromep = new ChromePromise()
 
-const getChromeTabs = {
+export const getChromeTabs = {
   all() {
     return chromep.tabs.query({ currentWindow: true })
   },
@@ -26,9 +26,22 @@ const getChromeTabs = {
   }
 };
 
-const closeTabs = tabs => chromep.tabs.remove(tabs);
+export function closeTabs (tabs) {
+  const tabsToBeRemoved = tabs.filter(({ active }) => !active).map(({ id }) => id);
+  return chromep.tabs.remove(tabsToBeRemoved)
+    .then(() => tabs);
+}
 
-export default {
-  getChromeTabs,
-  closeTabs
+
+export async function openLinks (windowType, tabURLs) {
+  const { incognito, id } = await chromep.windows.getCurrent();
+  if (windowType === incognito) {
+    if (tabURLs instanceof Array) {   
+      Promise.all(tabURLs.map(url => chromep.tabs.create({ url })))
+    } else {     
+      chromep.tabs.create({ url: tabURLs })
+    }
+  } else {
+    chromep.windows.create({ url: tabURLs, incognito: windowType });
+  }
 }
